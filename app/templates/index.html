@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>1111</title>
+  </head>
+  <body bgcolor="black">
+  <div style="width:800px; margin:0 auto;">
+      <p style="color:white;font-size:500%;">осталось:</p>
+      <div class="clear2"></div>
+      <div id="timer" >
+          <span id="days"></span>дней
+          <span id="hours"></span>часов
+          <span id="minutes"></span>минут
+          <span id="seconds"></span>секунд
+      </div>
+  </div>
+  <div class="container">
+  <ul class="acc">
+    <li>
+      <button class="acc_ctrl"><h2>a</h2></button>
+      <div class="acc_panel">
+        <p>asd</p>
+      </div>
+    </li>
+    <li>
+      <button class="acc_ctrl"><h2>b</h2></button>
+      <div class="acc_panel">
+        <p>asd</p>
+      </div>
+    </li>
+    <li>
+      <button class="acc_ctrl"><h2>c</h2></button>
+      <div class="acc_panel">
+        <p>asd</p>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+  <script>
+      $(function() {
+  $('.acc_ctrl').on('click', function(e) {
+    e.preventDefault();
+    if ($(this).hasClass('active')) {
+      $(this).removeClass('active');
+      $(this).next()
+      .stop()
+      .slideUp(300);
+    } else {
+      $(this).addClass('active');
+      $(this).next()
+      .stop()
+      .slideDown(300);
+    }
+  });
+});
+  </script>
+
+  <script>
+      var timer;
+
+var compareDate = new Date(2019, 4, 13, 12, 0, 0, 0);
+compareDate.setDate(compareDate.getDate()); //just for this demo today + 7 days
+
+timer = setInterval(function() {
+  timeBetweenDates(compareDate);
+}, 1000);
+
+function timeBetweenDates(toDate) {
+  var dateEntered = toDate;
+  var now = new Date();
+  var difference = dateEntered.getTime() - now.getTime() - 7200000;
+
+  if (difference <= 0) {
+
+    // Timer done
+    clearInterval(timer);
+
+  } else {
+
+    var seconds = Math.floor(difference / 1000);
+    var minutes = Math.floor(seconds / 60);
+    var hours = Math.floor(minutes / 60);
+    var days = Math.floor(hours / 24);
+
+    hours %= 24;
+    minutes %= 60;
+    seconds %= 60;
+
+    $("#days").text(days);
+    $("#hours").text(hours);
+    $("#minutes").text(minutes);
+    $("#seconds").text(seconds);
+  }
+}
+  </script>
+  </body>
+</html>
